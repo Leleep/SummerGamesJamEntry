@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://do3p6ax5lkpe"]
+
+[ext_resource type="Script" uid="uid://bylv1f60ovmjd" path="res://scripts/platform.gd" id="1_axdvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_motb6"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwpbi"]
+size = Vector2(20, 3.5)
+
+[node name="Platform" type="StaticBody2D" groups=["breakable"]]
+script = ExtResource("1_axdvg")
+width = 2.0
+
+[node name="PlatformShape" type="CollisionShape2D" parent="."]
+position = Vector2(146, 85)
+shape = SubResource("RectangleShape2D_motb6")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(146, 73.25)
+shape = SubResource("RectangleShape2D_wwpbi")
+
+[node name="Timer" type="Timer" parent="DetectionArea"]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="timeout" from="DetectionArea/Timer" to="." method="_on_timer_timeout"]
