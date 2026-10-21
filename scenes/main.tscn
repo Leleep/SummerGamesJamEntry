@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvinamklqvb0j"]
+
+[ext_resource type="PackedScene" uid="uid://dt663hd15ix8o" path="res://scenes/checkpoint.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://vd4j6hmn643h" path="res://scenes/killzone.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://do3p6ax5lkpe" path="res://scenes/Platform.tscn" id="3_tbgi4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sugp2"]
+distance = 2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jyhfs"]
+
+[node name="Main" type="Node"]
+
+[node name="Checkpoint" parent="." instance=ExtResource("1_sugp2")]
+position = Vector2(560, 264)
+
+[node name="Killzone" parent="." instance=ExtResource("2_jyhfs")]
+position = Vector2(646, 696)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("3_tbgi4")]
+position = Vector2(673, 422)
+width = 10.0
+
+[node name="WorldBoundries" type="Node" parent="."]
+
+[node name="RightWall" type="StaticBody2D" parent="WorldBoundries"]
+position = Vector2(1152, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/RightWall"]
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_sugp2")
+
+[node name="LeftWall" type="StaticBody2D" parent="WorldBoundries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/LeftWall"]
+skew = 1.569051
+shape = SubResource("WorldBoundaryShape2D_jyhfs")

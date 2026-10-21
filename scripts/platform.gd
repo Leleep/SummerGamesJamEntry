@@ -5,15 +5,16 @@ extends StaticBody2D
 @onready var detection_shape: CollisionShape2D = $DetectionArea/DetectionShape
 @onready var timer: Timer = $DetectionArea/Timer
 var timer_flag=false
+var tile_size=24
 
 func _ready() -> void:
-	var scale_ratio= Vector2(width,1.0)
-	platform_shape.apply_scale(scale_ratio)
-	detection_shape.apply_scale(scale_ratio)
+	platform_shape.scale=Vector2(width/tile_size,1.0)
+	detection_shape.scale=Vector2(width/tile_size,1.0)
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("palyer"):
 		if !timer_flag:
+			timer_flag=true
 			timer.start(break_time)
 
 func _on_timer_timeout() -> void:

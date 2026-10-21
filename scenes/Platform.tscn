@@ -10,7 +10,7 @@ size = Vector2(20, 3.5)
 
 [node name="Platform" type="StaticBody2D" groups=["breakable"]]
 script = ExtResource("1_axdvg")
-width = 2.0
+width = 200.0
 
 [node name="PlatformShape" type="CollisionShape2D" parent="."]
 position = Vector2(146, 85)
