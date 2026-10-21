@@ -4,7 +4,7 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_csqde"]
 
-[node name="Killzone" type="Area2D"]
+[node name="Killzone" type="Area2D" groups=["killzone"]]
 script = ExtResource("1_xlapc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
