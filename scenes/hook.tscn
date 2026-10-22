@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bfyrr6aml15o5"]
+
+[ext_resource type="Texture2D" uid="uid://btv6mcu0gv1nv" path="res://icon.svg" id="1_p5w6b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7f4nq"]
+radius = 12.0
+
+[node name="hook" type="StaticBody2D" unique_id=2126294031 groups=["hooks"]]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1366255714]
+shape = SubResource("CircleShape2D_7f4nq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=367841022]
+scale = Vector2(0.0234375, 0.0234375)
+texture = ExtResource("1_p5w6b")

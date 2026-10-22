@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvinamklqvb0j"]
+[gd_scene format=3 uid="uid://dvinamklqvb0j"]
 
 [ext_resource type="PackedScene" uid="uid://dt663hd15ix8o" path="res://scenes/checkpoint.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://vd4j6hmn643h" path="res://scenes/killzone.tscn" id="2_jyhfs"]
@@ -9,31 +9,31 @@ distance = 2.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jyhfs"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=892235885]
 
-[node name="Checkpoint" parent="." instance=ExtResource("1_sugp2")]
+[node name="Checkpoint" parent="." unique_id=21206590 instance=ExtResource("1_sugp2")]
 position = Vector2(560, 264)
 
-[node name="Killzone" parent="." instance=ExtResource("2_jyhfs")]
+[node name="Killzone" parent="." unique_id=1035254719 instance=ExtResource("2_jyhfs")]
 position = Vector2(646, 696)
 
-[node name="Platforms" type="Node" parent="."]
+[node name="Platforms" type="Node" parent="." unique_id=16239693]
 
-[node name="Platform" parent="Platforms" instance=ExtResource("3_tbgi4")]
+[node name="Platform" parent="Platforms" unique_id=1354647496 instance=ExtResource("3_tbgi4")]
 position = Vector2(673, 422)
 width = 10.0
 
-[node name="WorldBoundries" type="Node" parent="."]
+[node name="WorldBoundries" type="Node" parent="." unique_id=1561110285]
 
-[node name="RightWall" type="StaticBody2D" parent="WorldBoundries"]
+[node name="RightWall" type="StaticBody2D" parent="WorldBoundries" unique_id=901430826]
 position = Vector2(1152, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/RightWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/RightWall" unique_id=925490462]
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_sugp2")
 
-[node name="LeftWall" type="StaticBody2D" parent="WorldBoundries"]
+[node name="LeftWall" type="StaticBody2D" parent="WorldBoundries" unique_id=513285875]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/LeftWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundries/LeftWall" unique_id=1793870551]
 skew = 1.569051
 shape = SubResource("WorldBoundaryShape2D_jyhfs")
