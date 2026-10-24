@@ -1,29 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://do3p6ax5lkpe"]
+[gd_scene load_steps=5 format=3 uid="uid://do3p6ax5lkpe"]
 
 [ext_resource type="Script" uid="uid://bylv1f60ovmjd" path="res://scripts/platform.gd" id="1_axdvg"]
+[ext_resource type="Texture2D" uid="uid://culxf0ge8l83j" path="res://Dungeon Tile Set.png" id="2_motb6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_motb6"]
 resource_local_to_scene = true
+size = Vector2(16, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwpbi"]
-size = Vector2(20, 3.5)
+resource_local_to_scene = true
+size = Vector2(16, 8.25)
 
 [node name="Platform" type="StaticBody2D" groups=["breakable"]]
+position = Vector2(500, 200)
 script = ExtResource("1_axdvg")
-width = 200.0
+width = 5
 
 [node name="PlatformShape" type="CollisionShape2D" parent="."]
-position = Vector2(146, 85)
 shape = SubResource("RectangleShape2D_motb6")
+one_way_collision = true
 
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(146, 73.25)
+position = Vector2(0, -3.875)
 shape = SubResource("RectangleShape2D_wwpbi")
 
 [node name="Timer" type="Timer" parent="DetectionArea"]
 one_shot = true
+
+[node name="PlatformTiles" type="NinePatchRect" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_motb6")
+region_rect = Rect2(16, 145, 48, 4)
+patch_margin_left = 16
+patch_margin_right = 16
+axis_stretch_horizontal = 1
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="timeout" from="DetectionArea/Timer" to="." method="_on_timer_timeout"]
