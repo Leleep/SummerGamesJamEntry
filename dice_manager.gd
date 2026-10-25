@@ -1,7 +1,7 @@
 extends Node
 
 @export var camera: Camera2D
-@export var player: RigidBody2D
+@export var player: Player
 
 # ==============================================================================
 # CENTRALIZED CONFIGURATION

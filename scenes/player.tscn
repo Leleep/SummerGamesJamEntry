@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b502ve5celc0i"]
 
-[ext_resource type="Texture2D" uid="uid://btv6mcu0gv1nv" path="res://icon.svg" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://btv6mcu0gv1nv" path="res://assets/icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cpayv6qxqjvgt" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://v2ead2y7460u" path="res://state_machine.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://qymlxe6b7jkx" path="res://scripts/player/idle.gd" id="4_qlg0r"]
@@ -66,10 +66,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="grapple_timer" type="Timer" parent="movements" unique_id=2144138099]
+[node name="grapple_timer" type="Timer" parent="movements" unique_id=2144138099 groups=["player"]]
 one_shot = true
 
 [node name="grapple_cooldown" type="Timer" parent="movements" unique_id=242558307]
+wait_time = 0.5
 one_shot = true
 
 [node name="checkbox" type="Area2D" parent="." unique_id=1544662052]
@@ -79,5 +80,11 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_em7m8")
 debug_color = Color(0.8251311, 0.0016252792, 0.95694166, 0.41960785)
 
+[node name="modification_timer" type="Timer" parent="." unique_id=1823982514]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="movements/grapple_timer" to="movements/grapple" method="_on_grapple_timer_timeout"]
 [connection signal="body_shape_entered" from="checkbox" to="movements/grapple" method="_on_checkbox_body_shape_entered"]
+[connection signal="timeout" from="modification_timer" to="." method="_on_modification_timer_timeout"]

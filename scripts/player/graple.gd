@@ -34,7 +34,7 @@ func physics_update(_delta:float):
 	if distance<=min_dist:
 		state_machine.change_state("idle")
 		
-	if Input.is_action_just_pressed("left_click"):
+	if InputManager.is_action_just_pressed("left_click"):
 		if temp_switch: temp_switch = false
 		else: state_machine.change_state('idle')
 

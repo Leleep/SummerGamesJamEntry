@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://do3p6ax5lkpe"]
+[gd_scene format=3 uid="uid://do3p6ax5lkpe"]
 
 [ext_resource type="Script" uid="uid://bylv1f60ovmjd" path="res://scripts/platform.gd" id="1_axdvg"]
-[ext_resource type="Texture2D" uid="uid://culxf0ge8l83j" path="res://Dungeon Tile Set.png" id="2_motb6"]
+[ext_resource type="Texture2D" uid="uid://culxf0ge8l83j" path="res://assets/Dungeon Tile Set.png" id="2_motb6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_motb6"]
 resource_local_to_scene = true
@@ -11,35 +11,39 @@ size = Vector2(16, 6)
 resource_local_to_scene = true
 size = Vector2(16, 8.25)
 
-[node name="Platform" type="StaticBody2D" groups=["breakable"]]
+[node name="Platform" type="StaticBody2D" unique_id=129881948 groups=["breakable"]]
 position = Vector2(500, 200)
+collision_mask = 2
 script = ExtResource("1_axdvg")
 width = 5
 
-[node name="PlatformShape" type="CollisionShape2D" parent="."]
+[node name="PlatformShape" type="CollisionShape2D" parent="." unique_id=1519077194]
+scale = Vector2(5, 1)
 shape = SubResource("RectangleShape2D_motb6")
 one_way_collision = true
 
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="." unique_id=2058817654]
+collision_mask = 2
 
-[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea"]
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=933371137]
 position = Vector2(0, -3.875)
+scale = Vector2(5, 1)
 shape = SubResource("RectangleShape2D_wwpbi")
 
-[node name="Timer" type="Timer" parent="DetectionArea"]
+[node name="Timer" type="Timer" parent="DetectionArea" unique_id=114129327]
 one_shot = true
 
-[node name="PlatformTiles" type="NinePatchRect" parent="."]
+[node name="PlatformTiles" type="NinePatchRect" parent="." unique_id=1679418534]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -8.0
-offset_right = 16.0
-offset_bottom = 8.0
+offset_left = -40.0
+offset_top = -3.0
+offset_right = 40.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_motb6")

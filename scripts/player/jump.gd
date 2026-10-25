@@ -21,15 +21,15 @@ func enter():
 	jump_cut = false
 
 func physics_update(_delta:float):
-	var dir = Input.get_axis("left","right")
-	if not (Input.is_action_pressed("jump") or jump_cut):
+	var dir = InputManager.get_axis("left","right")
+	if not (InputManager.is_action_pressed("jump") or jump_cut):
 		if not jump_cut:
 			player.velocity.y*=(0.6)
 			jump_cut = true
 			
 	player.velocity.y+=gravity*_delta
 	
-	if jump_cut and Input.is_action_just_pressed("jump"):
+	if jump_cut and InputManager.is_action_just_pressed("jump"):
 		jump_buffer.start()
 	
 	if dir!=0:
