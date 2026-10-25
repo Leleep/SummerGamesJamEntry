@@ -11,9 +11,9 @@ func enter():
 	ground_decceleration = player.slide_deccelraion
 
 func physics_update(_delta:float):
-	var dir = Input.get_axis("left","right")
+	var dir = InputManager.get_axis("left","right")
 	
-	if not Input.is_action_pressed('shift'):
+	if not InputManager.is_action_pressed('down'):
 		if dir:
 			state_machine.change_state('run')
 		else:
@@ -26,5 +26,5 @@ func physics_update(_delta:float):
 	player.move_and_slide()
 	
 	#transition
-	if Input.is_action_just_pressed("jump") and (player.is_on_floor() or cayote_timer.time_left>0):
+	if InputManager.is_action_just_pressed("jump") and (player.is_on_floor() or cayote_timer.time_left>0):
 		state_machine.change_state("jump")

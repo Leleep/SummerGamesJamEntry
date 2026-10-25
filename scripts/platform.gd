@@ -20,6 +20,7 @@ var thickness = 6
 
 func _ready() -> void:
 	_update_size()
+	GameManager.platforms.append(self)
 
 func _update_size() -> void:
 	if not is_node_ready():
@@ -28,6 +29,7 @@ func _update_size() -> void:
 	detection_shape.scale = Vector2(width, 1.0)
 	platform_tiles.size = Vector2(width * tile_size, thickness)
 	platform_tiles.position = Vector2(-width * tile_size / 2.0, -thickness / 2.0)
+	timer.wait_time = break_time
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -44,4 +46,11 @@ func break_start():
 func _on_timer_timeout() -> void:
 #	can add an animation/tween here
 	if breakable:
-		queue_free()
+		toggle(true)
+
+func toggle(x:bool):
+	platform_shape.set_deferred("disabled",x)
+	detection_shape.set_deferred("disabled",x)
+	set_deferred("visible",!x)
+	set_deferred("breaking",x)
+	set_deferred("timer_flag",x)

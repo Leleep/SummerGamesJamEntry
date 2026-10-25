@@ -9,16 +9,18 @@ var air_speed = 125
 var ground_acceleration = 4000
 var ground_decceleration  = 2000
 var air_acceleration = 4000
-var air_decceleration = 100
+var air_decceleration = 500
 
 var slide_deccelraion = 300
 
 @onready var movements: StateMachine = $movements
 @onready var grapple_cooldown: Timer = $movements/grapple_cooldown
+@onready var modification_timer: Timer = $modification_timer
 
+var modification_cooldown = 10
 
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("left_click") and grapple_cooldown.time_left == 0:
+func _physics_process(_delta: float) -> void:
+	if InputManager.is_action_just_pressed("left_click") and grapple_cooldown.time_left == 0:
 		var target = get_grapple_target()
 		if target != Vector2.ZERO:
 			current_grapple_target = target
@@ -26,12 +28,33 @@ func _physics_process(delta: float) -> void:
 
 
 
+func die():
+	position = GameManager.respawn_position
+	GameManager.platform_respawn()
+
+
+
+func _on_modification_timer_timeout() -> void:
+	modification_timer.wait_time = modification_cooldown
+	modification_timer.start()
+	InputManager.randomize()
+
+
+
+
+
+
+
+
+
+
+
 ## code for auto grappling to hooks ________________________________
 
 
-@export var grapple_height: float = 150.0        # The reach (length) of the targeting triangle
-@export var grapple_base_width: float = 100.0   # The width of the triangle's base at max reach
-@export var terrain_collision_layer: int = 10   # Ensure your TileMap is on this physics layer
+@export var grapple_height: float = 100.0        # The reach (length) of the targeting triangle
+@export var grapple_base_width: float = 80.0   # The width of the triangle's base at max reach
+@export var terrain_collision_layer: int = 1   # Ensure your TileMap is on this physics layer
 @export var debug_show_cone: bool = true      # Toggle debug visualization for the triangle
 
 var current_grapple_target: Vector2 = Vector2.ZERO
@@ -114,7 +137,7 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	# Draw Debug Triangle when aiming (holding left click)
-	if debug_show_cone and Input.is_action_pressed("left_click") and movements.current_state.name != "grapple":
+	if debug_show_cone and InputManager.is_action_pressed("left_click") and movements.current_state.name != "grapple":
 		var mouse_pos = get_global_mouse_position()
 		var aim_dir = (mouse_pos - global_position).normalized()
 		if aim_dir != Vector2.ZERO:

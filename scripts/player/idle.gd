@@ -14,7 +14,7 @@ func enter():
 	gravity = player.gravity
 
 func physics_update(_delta:float):
-	var dir = Input.get_axis("left","right")
+	var dir = InputManager.get_axis("left","right")
 	
 	if not player.is_on_floor():
 		player.velocity.y += gravity*_delta
@@ -29,9 +29,9 @@ func physics_update(_delta:float):
 	player.move_and_slide()
 	
 	#transition
-	if Input.is_action_pressed('shift'):
+	if InputManager.is_action_pressed('down'):
 		state_machine.change_state('slide')
 	if dir!=0:
 		state_machine.change_state("run")
-	elif Input.is_action_just_pressed("jump") and (player.is_on_floor() or cayote_timer.time_left>0):
+	elif InputManager.is_action_just_pressed("jump") and (player.is_on_floor() or cayote_timer.time_left>0):
 		state_machine.change_state("jump")
