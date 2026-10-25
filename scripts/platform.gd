@@ -7,7 +7,7 @@ class_name Platform
 		width = value
 		_update_size()
 @export var break_time = 5.0
-@export var breakable = true
+@export var breakable = false
 @onready var platform_shape: CollisionShape2D = $PlatformShape
 @onready var detection_shape: CollisionShape2D = $DetectionArea/DetectionShape
 @onready var timer: Timer = $DetectionArea/Timer

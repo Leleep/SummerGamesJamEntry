@@ -83,19 +83,40 @@ var profiles: Dictionary = {
 var current_profile: Dictionary = profiles["0"]
 
 var jammed_last_press_time: Dictionary = {}
-var jammed_is_active: Dictionary = {}
+var jammed_unlocked: Dictionary = {}
 const JAMMED_WINDOW: float = 0.2 
+
+func _process(_delta: float) -> void:
+	var jammed_list = current_profile.get("jammed", [])
+	if jammed_list.is_empty():
+		return
+
+	var current_time = Time.get_ticks_msec() * 0.001
+
+	for action in jammed_list:
+		var target_action = _get_mapped_action(action)
+		
+		if not Input.is_action_pressed(target_action):
+			jammed_unlocked[action] = false
+			continue
+
+		if Input.is_action_just_pressed(target_action):
+			var last_time = jammed_last_press_time.get(action, -1.0)
+			if last_time > 0.0 and (current_time - last_time) <= JAMMED_WINDOW:
+				jammed_unlocked[action] = true 
+			jammed_last_press_time[action] = current_time
 
 func randomize():
 	var list = profiles.keys()
-	current_profile = profiles[list[randi_range(0,len(list)-1)]]
+	var random_key = list[randi_range(0, len(list) - 1)]
+	set_profile(random_key)
 	print(current_profile)
 
 func set_profile(profile_name: String) -> void:
 	if profiles.has(profile_name):
 		current_profile = profiles[profile_name]
 		jammed_last_press_time.clear()
-		jammed_is_active.clear()
+		jammed_unlocked.clear()
 	else:
 		push_warning("InputManager: Profile '" + profile_name + "' does not exist!")
 
@@ -122,14 +143,12 @@ func _get_action_strength_modified(action: StringName) -> float:
 		return 1.0 if bool(forced) else 0.0
 		
 	var target_action = _get_mapped_action(action)
-	var raw_pressed = Input.is_action_pressed(target_action)
 	var jammed_list = current_profile.get("jammed", [])
 	
 	if action in jammed_list:
-		if not raw_pressed:
-			jammed_is_active[action] = false
-			return 0.0
-		return Input.get_action_strength(target_action) if jammed_is_active.get(action, false) else 0.0
+		if jammed_unlocked.get(action, false):
+			return Input.get_action_strength(target_action)
+		return 0.0
 		
 	return Input.get_action_strength(target_action)
 
@@ -145,26 +164,16 @@ func is_action_just_pressed(action: StringName) -> bool:
 		return bool(forced)
 		
 	var target_action = _get_mapped_action(action)
-	var raw_just_pressed = Input.is_action_just_pressed(target_action)
 	var jammed_list = current_profile.get("jammed", [])
 	
 	if action in jammed_list:
 		var current_time = Time.get_ticks_msec() * 0.001
-		
-		if raw_just_pressed:
+		if Input.is_action_just_pressed(target_action):
 			var last_time = jammed_last_press_time.get(action, -1.0)
-			jammed_last_press_time[action] = current_time
-			
-			if last_time != -1.0 and (current_time - last_time) <= JAMMED_WINDOW:
-				jammed_is_active[action] = true
-				return true
-			else:
-				jammed_is_active[action] = false
-				return false
-				
+			return (last_time > 0.0 and (current_time - last_time) <= JAMMED_WINDOW)
 		return false
 		
-	return raw_just_pressed
+	return Input.is_action_just_pressed(target_action)
 
 func get_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var mult = current_profile.get("axis_multiplier", 1.0)

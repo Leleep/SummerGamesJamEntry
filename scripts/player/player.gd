@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 var gravity = 1000
-var jump = 280
+var jump = 350
 var run_speed = 150
 var air_speed = 125
 var ground_acceleration = 4000
@@ -26,11 +26,12 @@ func _physics_process(_delta: float) -> void:
 			current_grapple_target = target
 			movements.change_state("grapple")
 
+@onready var diee_timer: Timer = $diee_timer
 
 
 func die():
-	position = GameManager.respawn_position
-	GameManager.platform_respawn()
+	diee_timer.start()
+	get_tree().paused = true
 
 
 
@@ -39,6 +40,12 @@ func _on_modification_timer_timeout() -> void:
 	modification_timer.start()
 	InputManager.randomize()
 
+
+
+func _on_diee_timer_timeout() -> void:
+	get_tree().paused = false
+	position = GameManager.respawn_position
+	GameManager.platform_respawn()
 
 
 
@@ -52,9 +59,9 @@ func _on_modification_timer_timeout() -> void:
 ## code for auto grappling to hooks ________________________________
 
 
-@export var grapple_height: float = 100.0        # The reach (length) of the targeting triangle
-@export var grapple_base_width: float = 80.0   # The width of the triangle's base at max reach
-@export var terrain_collision_layer: int = 1   # Ensure your TileMap is on this physics layer
+@export var grapple_height: float = 150      # The reach (length) of the targeting triangle
+@export var grapple_base_width: float = 150.0   # The width of the triangle's base at max reach
+@export var terrain_collision_layer: int = 0   # Ensure your TileMap is on this physics layer
 @export var debug_show_cone: bool = true      # Toggle debug visualization for the triangle
 
 var current_grapple_target: Vector2 = Vector2.ZERO

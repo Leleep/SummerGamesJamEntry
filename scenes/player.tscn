@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b502ve5celc0i"]
+[gd_scene load_steps=11 format=3 uid="uid://b502ve5celc0i"]
 
 [ext_resource type="Texture2D" uid="uid://btv6mcu0gv1nv" path="res://assets/icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cpayv6qxqjvgt" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -15,76 +15,82 @@ size = Vector2(11, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_em7m8"]
 size = Vector2(14, 13)
 
-[node name="player" type="CharacterBody2D" unique_id=145823058 groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_g2els")
 
-[node name="visuals" type="Node2D" parent="." unique_id=1276313593]
+[node name="visuals" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="visuals" unique_id=660307309]
+[node name="Sprite2D" type="Sprite2D" parent="visuals"]
 scale = Vector2(0.09375, 0.099609375)
 texture = ExtResource("1_3vyb7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1562148901]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7f4nq")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1808566175]
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -40)
 zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="movements" type="Node" parent="." unique_id=1833250044 node_paths=PackedStringArray("initial_state")]
+[node name="movements" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_qhqgy")
 initial_state = NodePath("idle")
 metadata/_custom_type_script = "uid://v2ead2y7460u"
 
-[node name="idle" type="Node" parent="movements" unique_id=1423387355]
+[node name="idle" type="Node" parent="movements"]
 script = ExtResource("4_qlg0r")
 metadata/_custom_type_script = "uid://cmtlqbnlv6yma"
 
-[node name="run" type="Node" parent="movements" unique_id=216043704]
+[node name="run" type="Node" parent="movements"]
 script = ExtResource("5_fjrip")
 metadata/_custom_type_script = "uid://cmtlqbnlv6yma"
 
-[node name="jump" type="Node" parent="movements" unique_id=907538442]
+[node name="jump" type="Node" parent="movements"]
 script = ExtResource("6_fjrip")
 metadata/_custom_type_script = "uid://cmtlqbnlv6yma"
 
-[node name="grapple" type="Node" parent="movements" unique_id=1651279271]
+[node name="grapple" type="Node" parent="movements"]
 script = ExtResource("7_smehm")
 metadata/_custom_type_script = "uid://cmtlqbnlv6yma"
 
-[node name="slide" type="Node" parent="movements" unique_id=1292220526]
+[node name="slide" type="Node" parent="movements"]
 script = ExtResource("8_ur7pv")
 metadata/_custom_type_script = "uid://cmtlqbnlv6yma"
 
-[node name="cayote_timer" type="Timer" parent="movements" unique_id=718503632]
+[node name="cayote_timer" type="Timer" parent="movements"]
 wait_time = 0.1
 one_shot = true
 
-[node name="jump_buffer" type="Timer" parent="movements" unique_id=1166566600]
+[node name="jump_buffer" type="Timer" parent="movements"]
 wait_time = 0.1
 one_shot = true
 
-[node name="grapple_timer" type="Timer" parent="movements" unique_id=2144138099 groups=["player"]]
+[node name="grapple_timer" type="Timer" parent="movements" groups=["player"]]
 one_shot = true
 
-[node name="grapple_cooldown" type="Timer" parent="movements" unique_id=242558307]
+[node name="grapple_cooldown" type="Timer" parent="movements"]
 wait_time = 0.5
 one_shot = true
 
-[node name="checkbox" type="Area2D" parent="." unique_id=1544662052]
+[node name="checkbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="checkbox" unique_id=565531720]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="checkbox"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_em7m8")
+disabled = true
 debug_color = Color(0.8251311, 0.0016252792, 0.95694166, 0.41960785)
 
-[node name="modification_timer" type="Timer" parent="." unique_id=1823982514]
+[node name="modification_timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
-autostart = true
+
+[node name="diee_timer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
 
 [connection signal="timeout" from="movements/grapple_timer" to="movements/grapple" method="_on_grapple_timer_timeout"]
 [connection signal="body_shape_entered" from="checkbox" to="movements/grapple" method="_on_checkbox_body_shape_entered"]
 [connection signal="timeout" from="modification_timer" to="." method="_on_modification_timer_timeout"]
+[connection signal="timeout" from="diee_timer" to="." method="_on_diee_timer_timeout"]

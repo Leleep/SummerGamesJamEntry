@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dikr37ngcfh7l"]
+
+[ext_resource type="PackedScene" uid="uid://do3p6ax5lkpe" path="res://scenes/Platform.tscn" id="1_5pg7g"]
+[ext_resource type="Script" uid="uid://ckj3b2ooemk57" path="res://scripts/spikes.gd" id="2_xbcdo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbcdo"]
+resource_local_to_scene = true
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bflj7"]
+resource_local_to_scene = true
+size = Vector2(16, 8.25)
+
+[node name="spikes" instance=ExtResource("1_5pg7g")]
+script = ExtResource("2_xbcdo")
+width = 2
+breakable = false
+
+[node name="PlatformShape" parent="." index="0"]
+shape = SubResource("RectangleShape2D_xbcdo")
+
+[node name="DetectionShape" parent="DetectionArea" index="0"]
+shape = SubResource("RectangleShape2D_bflj7")
+
+[node name="PlatformTiles" parent="." index="2"]
+region_rect = Rect2(31.630608, 230.70789, 15.22599, 9.205154)
