@@ -1,0 +1,369 @@
+[gd_scene format=3 uid="uid://d3m7mrxmavye4"]
+
+[ext_resource type="FontFile" uid="uid://llrle7rhl1qk" path="res://assets/OldeTome.ttf" id="1_48xlc"]
+[ext_resource type="Texture2D" uid="uid://c7guxw88icgvc" path="res://assets/HR_Dark_Gothic_Castle.png" id="2_1ehe0"]
+[ext_resource type="Script" uid="uid://bvmd871075b0d" path="res://scripts/main_menu.gd" id="3_ce3w2"]
+[ext_resource type="AudioStream" uid="uid://o50vigdulbs" path="res://assets/hover.wav" id="3_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://x3a25rl8m3w8" path="res://assets/main_menu_pointer.png" id="4_n45e2"]
+[ext_resource type="AudioStream" uid="uid://b6t0gjl2vl2oi" path="res://assets/select.wav" id="4_yhxw7"]
+[ext_resource type="AudioStream" uid="uid://cg4705l1i555m" path="res://assets/back.wav" id="5_trj04"]
+[ext_resource type="AudioStream" uid="uid://du801yinvc4rx" path="res://assets/WAV_Nightfall.ogg" id="8_yhxw7"]
+[ext_resource type="AudioStream" uid="uid://bidmnwvkrgkhd" path="res://assets/wind_ambience.ogg" id="9_trj04"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m45x3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwoyq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hhmhx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wf2d5"]
+
+[sub_resource type="Theme" id="Theme_rp7b5"]
+default_font = ExtResource("1_48xlc")
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 16
+Button/styles/focus = SubResource("StyleBoxEmpty_m45x3")
+Button/styles/hover = SubResource("StyleBoxEmpty_wwoyq")
+Button/styles/normal = SubResource("StyleBoxEmpty_hhmhx")
+Button/styles/pressed = SubResource("StyleBoxEmpty_wf2d5")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.5686275)
+Label/constants/outline_size = 3
+Label/constants/shadow_outline_size = 3
+
+[node name="MainMenu" type="Control" unique_id=2069811666 node_paths=PackedStringArray("ui", "main_group", "settings_group", "load_group", "confirm_group", "title", "subtitle", "menu_buttons", "continue_button", "new_game_button", "load_game_button", "settings_button", "quit_button", "master_volume", "music_volume", "sfx_volume", "fullscreen_check", "save_list", "confirm_text", "confirm_yes", "confirm_no", "settings_back", "load_back", "music_player", "ambient_player", "sfx_player", "fade")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rp7b5")
+script = ExtResource("3_ce3w2")
+ui = NodePath("UI")
+main_group = NodePath("UI/MainGroup")
+settings_group = NodePath("UI/SettingsGroup")
+load_group = NodePath("UI/LoadGroup")
+confirm_group = NodePath("UI/ConfirmGroup")
+title = NodePath("UI/MainGroup/Title")
+subtitle = NodePath("UI/MainGroup/Subtitle")
+menu_buttons = NodePath("UI/MainGroup/MenuButtons")
+continue_button = NodePath("UI/MainGroup/MenuButtons/Continue")
+new_game_button = NodePath("UI/MainGroup/MenuButtons/NewGame")
+load_game_button = NodePath("UI/MainGroup/MenuButtons/Load")
+settings_button = NodePath("UI/MainGroup/MenuButtons/Settings")
+quit_button = NodePath("UI/MainGroup/MenuButtons/Quit")
+master_volume = NodePath("UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox/Master")
+music_volume = NodePath("UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox/Music")
+sfx_volume = NodePath("UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox/SFX")
+fullscreen_check = NodePath("UI/SettingsGroup/VBoxContainer/Fullscreen")
+save_list = NodePath("UI/LoadGroup/SaveList")
+confirm_text = NodePath("UI/ConfirmGroup/VBoxContainer/Label")
+confirm_yes = NodePath("UI/ConfirmGroup/VBoxContainer/HBoxContainer/Yes")
+confirm_no = NodePath("UI/ConfirmGroup/VBoxContainer/HBoxContainer/No")
+settings_back = NodePath("UI/SettingsGroup/SettingsBack")
+load_back = NodePath("UI/LoadGroup/LoadBack")
+music_player = NodePath("Music")
+ambient_player = NodePath("Ambience")
+sfx_player = NodePath("SFX")
+fade = NodePath("Dimmer")
+hover_sound = ExtResource("3_cp0ys")
+select_sound = ExtResource("4_yhxw7")
+back_sound = ExtResource("5_trj04")
+arrow_texture = ExtResource("4_n45e2")
+
+[node name="Background" type="TextureRect" parent="." unique_id=422529387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1ehe0")
+expand_mode = 2
+
+[node name="Lighting" type="ColorRect" parent="." unique_id=1614232242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1672515964]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UI" type="Control" parent="." unique_id=1307315785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainGroup" type="Control" parent="UI" unique_id=1363557704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/MainGroup" unique_id=1534977103]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.934
+anchor_top = 0.102
+anchor_right = 0.957
+anchor_bottom = 0.153
+offset_left = -78.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "The Game"
+
+[node name="Subtitle" type="Label" parent="UI/MainGroup" unique_id=71668781]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.88000005
+anchor_top = 0.26
+anchor_right = 0.88000005
+anchor_bottom = 0.26000002
+offset_left = -78.880005
+offset_bottom = 21.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 8
+text = "The Game
+"
+horizontal_alignment = 1
+
+[node name="MenuButtons" type="VBoxContainer" parent="UI/MainGroup" unique_id=645967569]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.068
+anchor_top = 0.608
+anchor_right = 0.068
+anchor_bottom = 0.608
+offset_top = -48.019997
+offset_right = 72.0
+offset_bottom = 47.98001
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="Continue" type="Button" parent="UI/MainGroup/MenuButtons" unique_id=978505332]
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="UI/MainGroup/MenuButtons" unique_id=1365931614]
+layout_mode = 2
+text = "New Game"
+
+[node name="Load" type="Button" parent="UI/MainGroup/MenuButtons" unique_id=1356810598]
+layout_mode = 2
+text = "Load"
+
+[node name="Settings" type="Button" parent="UI/MainGroup/MenuButtons" unique_id=1886646796]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="UI/MainGroup/MenuButtons" unique_id=1470306758]
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsGroup" type="Control" parent="UI" unique_id=235428266]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/SettingsGroup" unique_id=1077057432]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.051
+anchor_right = 0.5
+anchor_bottom = 0.051
+offset_left = -24.5
+offset_right = 24.5
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="SettingsBack" type="Button" parent="UI/SettingsGroup" unique_id=15763788]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058
+anchor_top = 0.797
+anchor_right = 0.058
+anchor_bottom = 0.797
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsGroup" unique_id=1572259013]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/SettingsGroup/VBoxContainer" unique_id=1158779183]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="LabelsVBox" type="VBoxContainer" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer" unique_id=138367491]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/LabelsVBox" unique_id=900857260]
+layout_mode = 2
+text = "Master"
+
+[node name="Music" type="Label" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/LabelsVBox" unique_id=1205044652]
+layout_mode = 2
+text = "Music"
+
+[node name="SFX" type="Label" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/LabelsVBox" unique_id=1911674972]
+layout_mode = 2
+text = "SFX"
+
+[node name="SlidersVBox" type="VBoxContainer" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer" unique_id=713886621]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Master" type="HSlider" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox" unique_id=1637006477]
+layout_mode = 2
+
+[node name="Music" type="HSlider" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox" unique_id=1795505127]
+layout_mode = 2
+
+[node name="SFX" type="HSlider" parent="UI/SettingsGroup/VBoxContainer/HBoxContainer/SlidersVBox" unique_id=2143851048]
+layout_mode = 2
+
+[node name="Fullscreen" type="CheckButton" parent="UI/SettingsGroup/VBoxContainer" unique_id=1118964118]
+layout_mode = 2
+text = "Fullscreen"
+alignment = 1
+
+[node name="LoadGroup" type="Control" parent="UI" unique_id=752897967]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/LoadGroup" unique_id=1204756057]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.051
+anchor_right = 0.5
+anchor_bottom = 0.051
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Load"
+horizontal_alignment = 1
+
+[node name="SaveList" type="VBoxContainer" parent="UI/LoadGroup" unique_id=1863929416]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LoadGroup/SaveList" unique_id=161861093]
+layout_mode = 2
+
+[node name="LoadBack" type="Button" parent="UI/LoadGroup" unique_id=253345953]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058
+anchor_top = 0.797
+anchor_right = 0.058
+anchor_bottom = 0.797
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Back"
+
+[node name="ConfirmGroup" type="Control" parent="UI" unique_id=354178063]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ConfirmGroup" unique_id=1444569719]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="UI/ConfirmGroup/VBoxContainer" unique_id=1662094877]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Are you Sure?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ConfirmGroup/VBoxContainer" unique_id=1479817387]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="UI/ConfirmGroup/VBoxContainer/HBoxContainer" unique_id=1631598070]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Yes"
+
+[node name="No" type="Button" parent="UI/ConfirmGroup/VBoxContainer/HBoxContainer" unique_id=1605372509]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1292673817]
+stream = ExtResource("8_yhxw7")
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=560007317]
+stream = ExtResource("9_trj04")
+bus = &"SFX"
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=35393281]
+bus = &"SFX"
